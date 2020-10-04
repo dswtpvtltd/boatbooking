@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework/objectManager/etc/config.xsd">
+    <type name="Dreamsunrise\Boatbooking\Model\Session">
+        <arguments>
+            <argument name="storage" xsi:type="object">Dreamsunrise\Boatbooking\Model\Session\Storage</argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+      <arguments>
+        <argument name="collections" xsi:type="array">
+            <item name="boatbooking_boat_grid_data_source" xsi:type="string">Dreamsunrise\Boatbooking\Model\ResourceModel\Boat\Collection</item>
+         </argument>
+      </arguments>
+    </type>
+
+    <virtualType name="Dreamsunrise\Boatbooking\Model\ResourceModel\Boat\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">boatbooking</argument>
+            <argument name="resourceModel" xsi:type="string">Dreamsunrise\Boatbooking\Model\ResourceModel\Boat</argument>
+        </arguments>
+    </virtualType>
+    <preference for="Magento\Catalog\Block\Product\View\Attributes" type="Dreamsunrise\Boatbooking\Block\Product\View\Attributes" />
+</config>

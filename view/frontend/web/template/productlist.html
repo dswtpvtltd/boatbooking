@@ -1,0 +1,16 @@
+<table>
+   <thead>
+   <tr>
+       <th width="33%">Preview</th>
+       <th width="33%">Product Name</th>
+       <th width="33%">Action</th>
+   </tr>
+   </thead>
+   <tbody data-bind="foreach: getProductList()">
+   <tr>
+       <td width="33%"><img data-bind="attr: {src: src}" width="320" height="auto" alt="Product Image"></td>
+       <td width="33%" data-bind="text: name"></td>
+       <td width="33%"><a data-bind="attr: {href: href}">Delete</a></td>
+   </tr>
+   </tbody>
+</table>

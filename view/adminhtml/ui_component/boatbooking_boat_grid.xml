@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui/etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">boatbooking_boat_grid.boatbooking_boat_grid_data_source</item>
+            <item name="deps" xsi:type="string">boatbooking_boat_grid.boatbooking_boat_grid_data_source</item>
+        </item>
+        <item name="spinner" xsi:type="string">boatbooking_boat_columns</item>
+        <item name="buttons" xsi:type="array">
+            <item name="add" xsi:type="array">
+                <item name="name" xsi:type="string">add</item>
+                <item name="label" xsi:type="string" translate="true">Add Boat Booking</item>
+                <item name="class" xsi:type="string">primary</item>
+                <item name="url" xsi:type="string">*/*/new</item>
+            </item>
+        </item>
+    </argument>
+
+    <dataSource name="boatbooking_boat_grid_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider</argument>
+            <argument name="name" xsi:type="string">boatbooking_boat_grid_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">enquiry_id</argument>
+            <argument name="requestFieldName" xsi:type="string">enquiry_id</argument>
+            <argument name="data" xsi:type="array">
+               <item name="config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+                <item name="update_url" path="mui/index/render" xsi:type="url"/>
+                <item name="storageConfig" xsi:type="array">
+                    <item name="indexField" xsi:type="string">enquiry_id</item>
+                </item>
+               </item>
+            </argument>
+        </argument>
+    </dataSource>
+
+    <listingToolbar name="listing_top">
+        <bookmark name="bookmarks" />
+        <columnsControls name="columns_controls" />
+        <exportButton name="export_button" />
+        <filterSearch name="fulltext" />
+        <filters name="listing_filters" />
+        <paging name="listing_paging" />
+    </listingToolbar>
+
+    <massaction name="listing_massaction">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="selectProvider" xsi:type="string">boatbooking_boat_grid.boatbooking_boat_grid.boatbooking_boat_columns.ids</item>
+                <item name="indexField" xsi:type="string">enquiry_id</item>
+            </item>
+        </argument>
+        <action name="delete">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="type" xsi:type="string">delete</item>
+                    <item name="label" xsi:type="string" translate="true">Delete</item>
+                    <item name="url" xsi:type="url" path="boatbooking/boat/massDelete"/>
+                    <item name="confirm" xsi:type="array">
+                        <item name="title" xsi:type="string" translate="true">Delete items</item>
+                        <item name="message" xsi:type="string" translate="true">Are you sure you wan't to delete selected items?</item>
+                    </item>
+                </item>
+            </argument>
+        </action>
+    </massaction>
+
+    <columns name="boatbooking_boat_columns">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="childDefaults" xsi:type="array">
+                    <item name="fieldAction" xsi:type="array">
+                        <item name="provider" xsi:type="string">boatbooking_boat_grid.boatbooking_boat_grid.boatbooking_boat_columns</item>
+                        <item name="target" xsi:type="string">boatAction</item>
+                        <item name="params" xsi:type="array">
+                            <item name="0" xsi:type="string">Edit</item>
+                            <item name="1" xsi:type="string">${ $.$data.rowIndex }</item>
+                        </item>
+                    </item>
+                </item>
+            </item>
+        </argument>
+
+        <selectionsColumn name="ids">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="indexField" xsi:type="string">enquiry_id</item>
+                    <item name="sortOrder" xsi:type="number">0</item>
+                </item>
+            </argument>
+        </selectionsColumn>
+        <column name="enquiry_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="sorting" xsi:type="string">desc</item>
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">ID</item>
+                    <item name="sortOrder" xsi:type="number">1</item>
+                </item>
+            </argument>
+        </column>
+        <column name="client_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Client Id</item>
+                    <item name="sortOrder" xsi:type="number">2</item>
+                </item>
+            </argument>
+        </column>
+        <column name="traffic_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Traffic Id</item>
+                    <item name="sortOrder" xsi:type="number">3</item>
+                </item>
+            </argument>
+        </column>
+        <column name="affiliate_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Affiliate Id</item>
+                    <item name="sortOrder" xsi:type="number">4</item>
+                </item>
+            </argument>
+        </column>
+        <column name="campaign_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Campaign Id</item>
+                    <item name="sortOrder" xsi:type="number">5</item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="firstName">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">First Name</item>
+                    <item name="sortOrder" xsi:type="number">6</item>
+                </item>
+            </argument>
+        </column>
+        <column name="lastName">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Last Name</item>
+                    <item name="sortOrder" xsi:type="number">7</item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="companyName">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Company Name</item>
+                    <item name="sortOrder" xsi:type="number">8</item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="comments">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Comments</item>
+                    <item name="sortOrder" xsi:type="number">9</item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="phone">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Phone</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="email">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Customer Email</item>
+                    <item name="sortOrder" xsi:type="number">11</item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="email">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Customer Email</item>
+                    <item name="sortOrder" xsi:type="number">12</item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="custentity_min_no_of_guests">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Minimum No Of Guests</item>
+                    <item name="sortOrder" xsi:type="number">13</item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="custentity_max_no_of_guests">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Maximum No Of Guests</item>
+                    <item name="sortOrder" xsi:type="number">14</item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="custentity_duration_type">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Duration Type</item>
+                    <item name="sortOrder" xsi:type="number">15</item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="custentity_duration">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Duration</item>
+                    <item name="sortOrder" xsi:type="number">16</item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="custentity_lead_cruise_date">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Cruise Date</item>
+                    <item name="sortOrder" xsi:type="number">17</item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="custentity_event_type">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Event Type</item>
+                    <item name="sortOrder" xsi:type="number">18</item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="custentity_est_start_time">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Start Time</item>
+                    <item name="sortOrder" xsi:type="number">19</item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="description">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Description</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="apistatus">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">API Status</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                </item>
+            </argument>
+        </column>
+
+       <actionsColumn name="actions" class="Dreamsunrise\Boatbooking\Ui\Component\Listing\Columns\PostActions">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="resizeEnabled" xsi:type="boolean">true</item>
+                    <item name="resizeDefaultWidth" xsi:type="string">160</item>
+                    <item name="indexField" xsi:type="string">enquiry_id</item>
+                    <item name="viewUrlPath" xsi:type="string">*/*/edit</item>
+                    <item name="sortOrder" xsi:type="number">200</item>
+                </item>
+            </argument>
+       </actionsColumn>
+    </columns>
+</listing>

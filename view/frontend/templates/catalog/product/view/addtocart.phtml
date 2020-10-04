@@ -1,0 +1,128 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var $block \Magento\Catalog\Block\Product\View */
+?>
+
+<?php
+$_product           = $block->getProduct();
+$r4q_enabled        = $block->getProduct()->getData("r4q_enabled");
+$r4q_order_disabled = $block->getProduct()->getData("r4q_order_disabled");
+?>
+<?php
+   $stockItem = $_product->getExtensionAttributes()->getStockItem();
+?>
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$currentlink = $block->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true]);
+
+$FormKey = $objectManager->get('Magento\Framework\Data\Form\FormKey');
+$link = $block->getUrl('boatbooking/boat/add/product/'.$_product->getId()."/form_key/".$FormKey->getFormKey()."/referer/".base64_encode($currentlink));
+?>
+<?php $buttonTitle = __('Add to Cart'); ?>
+<?php if ($stockItem->getIsInStock()): ?>
+  <?php /* remove add enquiry now and show add to cart button only**/?>
+  <?php if($r4q_order_disabled == 0):?>
+  <div class="box-tocart">
+      <div class="fieldset">
+          <?php if ($block->shouldRenderQuantity()): ?>
+          <div class="field qty">
+              <!--<label class="label" for="qty"><span><?= /* @escapeNotVerified */ __('Qty') ?></span></label>-->
+              <div class="control">
+                  <input type="hidden"
+                         name="qty"
+                         id="qty"
+                         value="<?= /* @escapeNotVerified */ $block->getProductDefaultQty() * 1 ?>"
+                         title="<?= /* @escapeNotVerified */ __('Qty') ?>"
+                         class="input-text qty"
+                         data-validate="<?= $block->escapeHtml(json_encode($block->getQuantityValidators())) ?>"
+                         />
+              </div>
+          </div>
+          <?php endif; ?>
+          <div class="actions">
+              <button type="submit"
+                      title="<?= /* @escapeNotVerified */ $buttonTitle ?>"
+                      class="action primary tocart"
+                      id="product-addtocart-button">
+                  <span><?= /* @escapeNotVerified */ $buttonTitle ?></span>
+              </button>
+              <?= $block->getChildHtml('', true) ?>
+          </div>
+      </div>
+  </div>
+  <?php endif;?>
+<?php else:?>
+  <?php $buttonTitle="Out Of Stock";?>
+  <div class="box-tocart">
+      <div class="fieldset">
+          <div class="actions">
+              <button type="button"
+                      title="<?= /* @escapeNotVerified */ $buttonTitle ?>"
+                      class="action alert-danger"
+                      id="product-addtocart-button">
+                  <span><?= /* @escapeNotVerified */ $buttonTitle ?></span>
+              </button>
+              <?= $block->getChildHtml('', true) ?>
+          </div>
+      </div>
+  </div>
+<?php endif;?>
+
+<!-- remove add to cart button and enable enquire  butom-->
+<?php if($r4q_enabled == 1):?>
+<div class="box-tocart">
+    <div class="fieldset">
+        <?php if ($block->shouldRenderQuantity()): ?>
+        <div class="field qty">
+            <!--<label class="label" for="qty"><span><?= /* @escapeNotVerified */ __('Qty') ?></span></label>-->
+            <div class="control">
+                <input type="hidden"
+                       name="qty"
+                       id="qty"
+                       value="<?= /* @escapeNotVerified */ $block->getProductDefaultQty() * 1 ?>"
+                       title="<?= /* @escapeNotVerified */ __('Qty') ?>"
+                       class="input-text qty"
+                       data-validate="<?= $block->escapeHtml(json_encode($block->getQuantityValidators())) ?>"
+                       />
+            </div>
+        </div>
+        <?php endif; ?>
+        <div class="actions">
+            <a title="<?= /* @escapeNotVerified */ $buttonTitle ?>" class="action primary enquiry" href="<?php echo $link?>">
+                Request a Quote
+            </a>
+            <?= $block->getChildHtml('', true) ?>
+        </div>
+    </div>
+</div>
+<?php endif;?>
+<script type="text/x-magento-init">
+    {
+        "#product_addtocart_form": {
+            "Magento_Catalog/js/validate-product": {}
+        }
+    }
+</script>
+<div class="pricematch">
+    <a class="fancybox" href="#pricematch">
+        <img width="289" src="<?php echo $this->getViewFileUrl('images/group-2.png');?>" alt="" />
+    </a>
+    <div id="pricematch" style="width:400px;display: none;">
+      <?php
+       echo $this->getLayout()
+                 ->createBlock('Magento\Cms\Block\Block')
+                 ->setBlockId('pricematchstaticblock')
+                 ->toHtml();
+      ?>
+    </div>
+</div>
+<div class="call-btn">
+<a href="callto:1300-221-933" class="btn btn-second-style btn-primary btn-block btn-larg btn-call">
+    <i class="fa fa-phone fa-lg icon-sprite icon-phone"></i> Call 1300 221 933</a>
+</div>

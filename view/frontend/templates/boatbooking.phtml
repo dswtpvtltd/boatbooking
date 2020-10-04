@@ -1,0 +1,518 @@
+<?php
+$pricerange = $this->getPriceRange();
+$eventtype = $this->getEventType();
+?>
+<?php
+    $bookingDetails = $this->_boatSession->getBoatSession();
+    
+    if(count($bookingDetails['products']) >= 1):
+?>
+<form class="form" action="<?php /* @escapeNotVerified */ echo $block->getFormAction(); ?>" id="boatbooking-form" method="post" data-hasrequired="* Required Fields" data-mage-init='{"validation":{}}'>
+    <fieldset class="fieldset">
+        
+        <div id="product-list" data-bind="scope:'product-list'">
+           <!-- ko template: getTemplate() --><!-- /ko -->
+           <script type="text/x-magento-init">
+              {
+                "#product-list":{
+                    "Magento_Ui/js/core/app": <?php /* @escapeNotVerified */ echo $block->getJsLayout();?>
+                }
+              }
+           </script>
+
+           <script>
+               require(['mage/url','Magento_Ui/js/block-loader'], function(url, blockLoader) {
+                   blockLoader("<?php /* @escapeNotVerified */ echo $block->getViewFileUrl('images/loader-1.gif'); ?>");
+                   return url.setBaseUrl('<?php /* @escapeNotVerified */ echo $block->getBaseUrl();?>');
+               });
+           </script>
+        </div>
+        <div class="cart-collaterals r4q-collaterals">
+            <div class="cart-rf4-details">
+                <h2>Enter your details to get a price proposal</h2>
+                <ul class="form-list">
+                    <li style="width:100%; float: left;">
+                        <label class="required" for="r4qDetailsEmail">Email address</label>
+                        <div class="input-box">
+                            <input type="text" style="width:100%; height: 34px;" class="input-text validate-email required-entry" name="email" id="r4qDetailsEmail" value="">
+                            <input type="hidden" id="r4qDetailsMagentoLead" name="magento_lead_c" value="MagentoLead">
+                        </div>
+                    </li>
+
+                    <li style="width:100%; float: left;">
+                        <div style="width:100%;">
+                            <div style="width:50%; float:left;">
+                                <label class="required" for="r4qDetailsFirstname">First Name</label>
+                                <div class="input-box">
+                                    <input type="text" style="width:98%; height: 34px;" class="input-text required-entry" name="firstname" id="r4qDetailsFirstname" value="">
+                                </div>
+                            </div>
+                            <div style="width:50%; float:right;">
+                                <label class="required" for="r4qDetailsLastname">Last Name</label>
+                                <div class="input-box">
+                                   <input type="text" class="input-text required-entry" name="lastname" id="r4qDetailsLastname" value="">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="wide" style="width:100%; float: left;">
+                        <div class="row form-group">
+                            <div class="col-sm-12 co-xs-12">
+                                <div class="field-css ">
+                                    <label class="validate-entry" for="r4qDetailsCompany">Company Name</label>
+                                    <div class="input-box">
+                                        <input type="text" style="width:98%; height: 34px;" class="input-text" name="companyname" id="r4qDetailsCompany" value="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li style="width:100%; float: left;">
+                       <div style="width:100%;">
+                            <div style="width:49%; float:left; margin-right: 10px">
+                                <label class="required" for="r4qDetailsTelephone">Mobile</label>
+                                <div class="input-box row">
+                                    <div class="col-md-3" style="padding-left: 10px; padding-right: 0;">
+                                        <select  class="validate-select form-control" name="countrycode_mobile">
+                                            <option value="">Please select Country Code</option>
+                                            <option value="1">Afghanistan +93</option>
+                                            <option value="2">Albania +355</option>
+                                            <option value="3">Algeria +213</option>
+                                            <option value="4">American Samoa +1</option>
+                                            <option value="5">Andorra +376</option>
+                                            <option value="6">Angola +244</option>
+                                            <option value="7">Anguilla +1</option>
+                                            <option value="8">Antarctica +672</option>
+                                            <option value="9">Antigua and Barbuda +1</option>
+                                            <option value="10">Argentina +54</option>
+                                            <option value="11">Armenia +374</option>
+                                            <option value="12">Aruba +297</option>
+                                            <option value="13" selected="">Australia +61</option>
+                                            <option value="14">Austria +43</option>
+                                            <option value="15">Azerbaijan +994</option>
+                                            <option value="16">Bahamas +1</option>
+                                            <option value="17">Bahrain +973</option>
+                                            <option value="18">Bangladesh +880</option>
+                                            <option value="19">Barbados +1</option>
+                                            <option value="20">Belarus +375</option>
+                                            <option value="21">Belgium +32</option>
+                                            <option value="22">Belize +501</option>
+                                            <option value="23">Benin +229</option>
+                                            <option value="24">Bermuda +1</option>
+                                            <option value="25">Bhutan +975</option>
+                                            <option value="26">Bolivia +591</option>
+                                            <option value="27">Bosnia and Herzegovina +387</option>
+                                            <option value="28">Botswana +267</option>
+                                            <option value="29">Brazil +55</option>
+                                            <option value="30">British Indian Ocean Territory +246</option>
+                                            <option value="31">British Virgin Islands +1</option>
+                                            <option value="32">Brunei +673</option>
+                                            <option value="33">Bulgaria +359</option>
+                                            <option value="34">Burkina Faso +226</option>
+                                            <option value="35">Burundi +257</option>
+                                            <option value="36">Cambodia +855</option>
+                                            <option value="37">Cameroon +237</option>
+                                            <option value="38">Canada +1</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-9">
+                                      <input type="number" class="input-text required-entry validate-length maximum-length-10 minimum-length-9 validate-digits" name="telephone" id="r4qDetailsTelephone" value="">
+                                    </div>
+                                </div>
+                           </div>
+                           
+                           <div style="width:50%; float:left;">
+                                <label class="required" for="countrycode_landline">Land Line</label>
+                                <div class="input-box row">
+                                    <div class="col-md-3" style="padding-right:0">
+                                        <select  class="validate-select form-control" name="countrycode_landline" id="countrycode_landline">
+                                            <option value="">Please select Country Code</option>
+                                            <option value="1">Afghanistan +93</option>
+                                            <option value="2">Albania +355</option>
+                                            <option value="3">Algeria +213</option>
+                                            <option value="4">American Samoa +1</option>
+                                            <option value="5">Andorra +376</option>
+                                            <option value="6">Angola +244</option>
+                                            <option value="7">Anguilla +1</option>
+                                            <option value="8">Antarctica +672</option>
+                                            <option value="9">Antigua and Barbuda +1</option>
+                                            <option value="10">Argentina +54</option>
+                                            <option value="11">Armenia +374</option>
+                                            <option value="12">Aruba +297</option>
+                                            <option value="13" selected="">Australia +61</option>
+                                            <option value="14">Austria +43</option>
+                                            <option value="15">Azerbaijan +994</option>
+                                            <option value="16">Bahamas +1</option>
+                                            <option value="17">Bahrain +973</option>
+                                            <option value="18">Bangladesh +880</option>
+                                            <option value="19">Barbados +1</option>
+                                            <option value="20">Belarus +375</option>
+                                            <option value="21">Belgium +32</option>
+                                            <option value="22">Belize +501</option>
+                                            <option value="23">Benin +229</option>
+                                            <option value="24">Bermuda +1</option>
+                                            <option value="25">Bhutan +975</option>
+                                            <option value="26">Bolivia +591</option>
+                                            <option value="27">Bosnia and Herzegovina +387</option>
+                                            <option value="28">Botswana +267</option>
+                                            <option value="29">Brazil +55</option>
+                                            <option value="30">British Indian Ocean Territory +246</option>
+                                            <option value="31">British Virgin Islands +1</option>
+                                            <option value="32">Brunei +673</option>
+                                            <option value="33">Bulgaria +359</option>
+                                            <option value="34">Burkina Faso +226</option>
+                                            <option value="35">Burundi +257</option>
+                                            <option value="36">Cambodia +855</option>
+                                            <option value="37">Cameroon +237</option>
+                                            <option value="38">Canada +1</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3" id="isdcontainer">
+                                        <select name="isdcode" id="r4qDetailsIsdcode">
+                                            <option value="1">Australian Capital Territory (02)</option>
+                                            <option value="2" selected="">New South Wales (02)</option>
+                                            <option value="3">Northern Territory (08)</option>
+                                            <option value="4">Queensland (07)</option>
+                                            <option value="5">South Australia (08)</option>
+                                            <option value="6">Tasmania (03)</option>
+                                            <option value="7">Victoria (03)</option>
+                                            <option value="8">Western Australia (08)</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                      <input type="number" class="input-text required-entry validate-length validate-digits" name="altphone" id="r4qDetailsAltphone" value="">
+                                    </div>
+                                </div>
+                           </div>
+                    </li>
+
+                    <li style="width:100%; float: left;">
+                       <div style="width:100%;">
+                           <div style="width:50%; float:left;">
+                               <label class="required" for="r4qDetailsEstimatedStarttime">Estimated Start Time (24hr format)</label>
+                                <div class="input-box">
+                                    <input type="text" style="width:98%; height: 34px;" class="input-text required-entry validate-time24" name="estimated_starttime" id="r4qDetailsEstimatedStarttime" value="">
+                                </div>
+                           </div>
+                           <div style="width:50%; float:right;">
+                               <label class="required" for="r4qMinimumEstimatedGuests">Minimum number of Guests</label>
+                                <div class="input-box">
+                                    <input type="number" min="1" class="required-entry" name="min_guests_c" id="r4qMinimumEstimatedGuests" value="" onkeypress="return isValueNumeric(event);">
+                                </div>
+                           </div>
+                       </div>
+                    </li>
+
+                    <li style="width:100%; float: left;">
+                        <div style="width:100%;">
+                            <div style="width:50%; float:left;">
+                                <label class="required" for="r4qMaximumEstimatedGuests">Maximum number of Guests</label>
+                                <div class="input-box">
+                                    <input type="number" style="width:98%; height: 34px;" min="1" class="required-entry" name="max_guests_c" id="r4qMaximumEstimatedGuests" value="" onkeypress="return isValueNumeric(event);">
+                                </div>
+                            </div>
+                            <div style="width:50%; float:right;">
+                                <label class="required" for="r4qDetailsStartDate">Start Date</label>
+                                <div class="input-box">
+                                    <input type="text" class="input-text required-entry" readonly name="startdate" id="r4qDetailsstartdate" value="">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li style="width:100%; float: left;">
+                        <div style="width:100%;">
+                            <div style="width:50%; float:left;">
+                                <label class="required" for="r4qDetailsPricerange">Price Range</label>
+                                <div class="input-box">
+                                    <select style="width:98%; height: 34px;" id="r4qDetailsPricerange" name="pricerange" title="Price Range" class="validate-select required-entry">
+                                        <option value="">Please select</option>
+                                        <?php
+                                        foreach($pricerange as $_pricerange){
+                                            ?>
+                                                <option value="<?php echo $_pricerange->getPricerangeId();?>"><?php echo $_pricerange->getTitle();?></option>
+                                           <?php
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div style="width:50%; float:right;">
+                                <label class="required" for="r4qDetailsEventtype">Event Type</label>
+                                <div class="input-box">
+                                    <select id="r4qDetailsEventtype" name="eventtype" title="Event Type" class="validate-select required-entry" onchange="displayDurationType(this)">
+                                        <option value="">Please select</option>
+                                        <?php
+                                        foreach($eventtype as $_eventtype)
+                                        {
+                                         ?>
+                                        <option value="<?php echo $_eventtype->getEventtypeId()?>"><?php echo $_eventtype->getTitle()?></option>
+                                        <?php
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li style="width:100%; float: left;">
+                        <div style="width:100%;">
+                            <div id="sailing_superyachts" style="width:50%; float:left;">
+                                <label class="required" for="r4qDetailsDurationType">Duration Type</label>
+                                <div class="input-box">
+                                    <select style="width:98%; height: 34px;" id="r4qDetailsDurationType" name="duration_type" title="Duration Type" class="validate-select">
+                                        <option value="">Please select</option>
+                                        <option value="Days"> Days</option>
+                                        <option value="Hours"> Hours</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div style="width:50%; float:right;">
+                                <label class="required" for="r4qDetailsDuration">Duration</label>
+                                <div class="input-box">
+                                    <input type="number" min="1" class="required-entry validate-number" name="duration" id="r4qDetailsDuration" value="" onkeypress="return isValueNumeric(event);">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="wide" style="width:100%; float: left;">
+                        <div class="row form-group">
+                            <div class="col-sm-12 co-xs-12">
+                                <div class="field-css ">
+                                    <label for="duration" class="required"> <em>*</em>How did you hear about us?</label>
+                                    <div class="input-box">
+                                        <select style="width:100%;" id="colorselector" name="howyouhear" class="validate-select form-control">
+                                            <option value="">Please select</option>
+                                            <option value="Past Customer"> Past Customer</option>
+                                            <option value="Word Of Mouth"> Word Of Mouth</option>
+                                            <option value="Google"> Google</option>
+                                            <option value="Other Search Engine"> Other Search Engine</option>
+                                            <option value="Magazine"> Magazine</option>
+                                            <option value="Newspaper"> Newspaper</option>
+                                            <option value="Television"> Television</option>
+                                            <option value="Radio"> Radio</option>
+                                            <option value="Other"> Other </option>
+                                        </select>
+                                        <div class="field-css howuhearfeildbox colors" style="display: none;">
+                                            <div class="input-box">
+                                                <input style="width:100%;" type="text" id="howuhearfeild" name="howuhearfeild" placeholder="Type Here How did you hear about us?" class="form-control input-text required-entry">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li style="width:100%; float: left;">
+                        <label class="validate-entry" for="r4qDetailsRemark">General Comments</label>
+                        <div class="input-box">
+                            <textarea name="remark" id="r4qDetailsRemark" class="r4q-remark"></textarea>
+                            <br> Please do not use URL's in comments.
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="actions-toolbar">
+            <div class="primary">
+                    <input type="hidden" name="hideit" id="hideit" value="" />
+                    <button type="submit" title="Submit" class="action submit primary">
+                       <span>Submit</span>
+                    </button>
+            </div>
+        </div>
+        <script>
+             require([
+                  "jquery",
+                  "mage/calendar",
+                  "Dreamsunrise_Boatbooking/js/jquery.inputmask"
+             ], function($){
+                 $("#r4qDetailsEstimatedStarttime").inputmask("99:99");
+                 $("#r4qDetailsstartdate").calendar({
+                        showsTime: false,
+                        hideIfNoPrevNext: true,
+                        buttonText: "<?php echo __('Select Date') ?>",
+                        minDate: new Date(),
+                        dateFormat: 'dd/mm/yyyy'
+                 });
+                  
+                 $(document).on('change',"#countrycode_landline",function(evt){
+                     var htmltext = '';
+                     if(this.value != '+61'){
+                        htmltext = '<input type="number" class="input-text required-entry validate-length validate-digits" name="isdcode" id="r4qDetailsIsdcode" value="">';
+                     }else{
+                        htmltext += '<select name="isdcode" id="r4qDetailsIsdcode">';
+                        htmltext += '<option value="">Plese Select State</option>';
+                        htmltext += '<option value="2">Australian Capital Territory (02)</option>';
+                        htmltext += '<option value="2" selected="selected">New South Wales (02)</option>';
+                        htmltext += '<option value="8">Northern Territory (08)</option>';
+                        htmltext += '<option value="7">Queensland (07)</option>';
+                        htmltext += '<option value="8">South Australia (08)</option>';
+                        htmltext += '<option value="3">Tasmania (03)</option>';
+                        htmltext += '<option value="3">Victoria (03)</option>';
+                        htmltext += '<option value="8">Western Australia (08)</option>';
+                        htmltext += '</select>';
+                     }
+                     $("#isdcontainer").html(htmltext);
+                 });
+
+                 $(document).on('blur',"[name='isdcode']",function(){
+                     if($("[name='isdcode']").val() == '0' || $("[name='isdcode']").val() == '00'){
+                        $("[name='isdcode']").val('');
+                     }else{ 
+                        $("[name='isdcode']").val(parseInt($("[name='isdcode']").val(), 10));
+                     }
+                 });
+
+                 $(document).on('blur',"[name='altphone']",function(){
+                     if($("[name='altphone']").val() == '0' || $("[name='altphone']").val() == '00'){
+                        $("[name='altphone']").val('');
+                     }else{ 
+                        $("[name='altphone']").val(parseInt($("[name='altphone']").val(), 10));
+                     }
+
+                     if($("[name='altphone']").val() != ''){
+                        $("[name='telephone']").removeClass("required-entry");
+                     }
+                 });
+
+                 $(document).on('blur',"[name='telephone']",function(){
+                     if($("[name='telephone']").val() == '0' || $("[name='telephone']").val() == '00'){
+                        $("[name='telephone']").val('');
+                     }else{ 
+                        $("[name='telephone']").val(parseInt($("[name='telephone']").val(), 10));
+                     }
+                     if($("[name='telephone']").val() != ''){
+                        $("[name='altphone']").removeClass("required-entry");
+                     }
+                 });
+
+                 $(document).on('keypress',"[name='min_guests_c']",function(evt){
+                        //console.log(evt);
+                        evt = (evt) ? evt : window.event;
+                        var charCode = (evt.which) ? evt.which : evt.keyCode;
+                        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+                                console.log(charCode);
+                                return false;
+                        } else {
+                                return true;
+                        }
+                 });
+
+
+                 $(document).on('keypress',"[name='max_guests_c']",function(evt){
+                        //console.log(evt);
+                        evt = (evt) ? evt : window.event;
+                        var charCode = (evt.which) ? evt.which : evt.keyCode;
+                        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+                                console.log(charCode);
+                                return false;
+                        } else {
+                                return true;
+                        }
+                 });
+
+                 $(document).on('keypress',"[name='duration']",function(evt){
+                        //console.log(evt);
+                        evt = (evt) ? evt : window.event;
+                        var charCode = (evt.which) ? evt.which : evt.keyCode;
+                        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+                                console.log(charCode);
+                                return false;
+                        } else {
+                                return true;
+                        }
+                 });
+
+                //PT-WORK
+                function isValueNumeric(evt) {
+                        //console.log(evt);
+                        evt = (evt) ? evt : window.event;
+                        var charCode = (evt.which) ? evt.which : evt.keyCode;
+                        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+                                console.log(charCode);
+                                return false;
+                        } else {
+                                return true;
+                        }
+                }
+
+                // validate phone number
+                function isPhoneNumberValid(evt) {
+
+                        evt = (evt) ? evt : window.event;
+                        var charCode = (evt.which) ? evt.which : evt.keyCode;
+                        return jQuery.isNumeric(charCode);
+                        if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode !== 43) {
+                                console.log(charCode);
+                                return false;
+                        } else {
+                                return true;
+                        }
+                }
+                function displayDurationType(obj) {
+                        var value = obj.value; // the value of the textbox
+                        console.log(value);
+                        //all_event_type
+                        //sailing_superyachts
+
+                        if(value === "" || value === "Super Yachts" || value === "Sailing")
+                        {
+                                document.getElementById("sailing_superyachts").style.display = 'block';
+                                document.getElementById("all_event_type").style.display = 'none';
+                                document.getElementById('r4qDetailsDuration').value='';
+                        }
+                        else
+                        {
+                                document.getElementById("sailing_superyachts").style.display = 'none';
+                                document.getElementById("all_event_type").style.display = 'block';
+                                document.getElementById('r4qDetailsDuration').value='';
+                        }
+                }
+                /*
+                * Function: displayDuration
+                * Description: Display duration in hours/days
+                * according to the event type selected
+                */
+                function displayDuration(obj) {
+                        var value = obj.value; // the value of the textbox
+                        console.log(value);
+                        if(value === "")
+                        {
+                                document.getElementById("duration_days").style.display = 'none';
+                                document.getElementById("duration_hours").style.display = 'none';
+
+                                document.getElementById('r4qDetailsDurationDays').value='';
+                                document.getElementById('r4qDetailsDurationHours').value='';
+                        }
+                        else if (value === "Super Yachts" || value === "Sailing")
+                        {
+                                 document.getElementById("duration_days").style.display = 'block';
+                                 document.getElementById('r4qDetailsDurationHours').value='';
+                                 document.getElementById("duration_hours").style.display = 'none';
+                        }
+                        else
+                        {
+                                document.getElementById("duration_hours").style.display = 'block';
+                                document.getElementById('r4qDetailsDurationDays').value='';
+                                document.getElementById("duration_days").style.display = 'none';
+                        }
+                }
+               });
+        </script>
+    </fieldset>
+    <?php echo $this->getBlockHtml('formkey')?>
+</form>
+<?php else: ?>
+    <fieldset class="fieldset">
+        <div class="cart-empty">
+        <p>You have no items for request for quote.</p>
+        <p>Click <a href="https://www.anyboat.com.au/">here</a> to add item for quote.</p>
+        </div>
+    </fieldset>
+<?php endif; ?>
